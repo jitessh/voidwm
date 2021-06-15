@@ -97,6 +97,7 @@ static Key keys[] = {
 	{ MODKEY,                       XK_space,   spawn,          {.v = termcmd } }, /* one handed mode */
 	{ MODKEY,                       XK_d,       spawn,          {.v = menucmd } },
 	{ MODKEY|ShiftMask,             XK_q,       quit,           {0} },
+	{ MODKEY,                       XK_q,       quit,           {1} },
 
 	/* ---------- layouts ---------- */
 	{ MODKEY,                       XK_t,       setlayout,      {.v = &layouts[0]} }, /* tile */

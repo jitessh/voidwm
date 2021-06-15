@@ -14,6 +14,7 @@ static const unsigned int gappov    = 10;       /* vert outer gap between window
 static const int barheight          = 25;       /* 0 means dwm will calculate bar height wrt font */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
+#define VIEWONTAG 1                             /* switch view on tag switch */
 
 static const char col_gray1[]       = "#222222";
 static const char col_gray2[]       = "#444444";

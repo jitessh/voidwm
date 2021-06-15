@@ -136,6 +136,8 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_period,  tagmon,         {.i = +1 } },
 
 	/* ----------- resize ---------- */
+	{ MODKEY,                       XK_f,       togglefullscreen,        {0} },
+	{ MODKEY|ShiftMask,             XK_f,       togglefakefullscreen,    {0} },
 	{ MODKEY|ControlMask,           XK_h,       setmfact,       {.f = -0.05} },
 	{ MODKEY|ControlMask,           XK_j,       setcfact,       {.f = -0.05} },
 	{ MODKEY|ControlMask,           XK_k,       setcfact,       {.f = +0.05} },

@@ -25,6 +25,12 @@ static const char *colors[][3]      = {
 	[SchemeSel]  = { col_gray4, col_cyan,  col_cyan  },
 };
 
+/* --------------- autostart ------------- */
+static const char autostartsh[]     = "autostart.sh";
+static const char autostartwaitsh[] = "autostartwait.sh";
+static const char dwmdir[]          = "dwm";     /* parent dir of autostart(wait).sh */
+static const char pathfromhome[]    = ".config"; /* custom dir from $HOME if $XDG_CONFIG_HOME was not set; don't add leading & trailing '/' */
+
 /* ----------------- tags ---------------- */
 static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 

@@ -1,0 +1,6 @@
+[Desktop Entry]
+Name=voidwm
+Comment=Dynamic Window Manager
+Exec=dwm
+Icon=dwm
+Type=Application

@@ -28,7 +28,7 @@ clean:
 dist: clean
 	mkdir -p dwm-${VERSION}
 	cp -R LICENSE Makefile README config.h config.mk\
-		dwm.1 drw.h util.h ${SRC} transient.c dwm-${VERSION}
+		dwm.1 drw.h util.h ${SRC} transient.c voidwm.desktop dwm-${VERSION}
 	tar -cf dwm-${VERSION}.tar dwm-${VERSION}
 	gzip dwm-${VERSION}.tar
 	rm -rf dwm-${VERSION}
@@ -40,9 +40,12 @@ install: all
 	mkdir -p ${DESTDIR}${MANPREFIX}/man1
 	sed "s/VERSION/${VERSION}/g" < dwm.1 > ${DESTDIR}${MANPREFIX}/man1/dwm.1
 	chmod 644 ${DESTDIR}${MANPREFIX}/man1/dwm.1
+	mkdir -p /usr/share/xsessions
+	cp -f voidwm.desktop /usr/share/xsessions
 
 uninstall:
 	rm -f ${DESTDIR}${PREFIX}/bin/dwm\
-		${DESTDIR}${MANPREFIX}/man1/dwm.1
+		${DESTDIR}${MANPREFIX}/man1/dwm.1\
+		/usr/share/xsessions/voidwm.desktop
 
 .PHONY: all options clean dist install uninstall

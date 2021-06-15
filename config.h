@@ -126,6 +126,8 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_c,       killclient,     {0} },
 	{ MODKEY,                       XK_j,       focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,       focusstack,     {.i = -1 } },
+	{ MODKEY|ShiftMask,             XK_j,       rotatestack,    {.i = +1 } },
+	{ MODKEY|ShiftMask,             XK_k,       rotatestack,    {.i = -1 } },
 	{ MODKEY,                       XK_m,       incnmaster,     {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_m,       incnmaster,     {.i = -1 } },
 

@@ -151,6 +151,8 @@ static Key keys[] = {
 	/* ------------ tag ------------ */
 	{ Mod1Mask,                     XK_Tab,     shiftviewclients, { .i = +1 } },
 	{ Mod1Mask|ShiftMask,           XK_Tab,     shiftviewclients, { .i = -1 } },
+	{ MODKEY,                       XK_r,       reorganizetags, {0} },
+	{ MODKEY|ShiftMask,             XK_r,       distributetags, {0} },
 
 	/* ---------- keyboard --------- */
 	{ 0,            XF86XK_AudioLowerVolume,    spawn,          SHCMD(vol_down) },

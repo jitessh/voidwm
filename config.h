@@ -112,6 +112,8 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_t,       setlayout,      {.v = &layouts[3]} }, /* gaplessgrid */
 	{ MODKEY,                       XK_y,       setlayout,      {.v = &layouts[4]} }, /* centeredmaster */
 	{ MODKEY|ShiftMask,             XK_y,       setlayout,      {.v = &layouts[7]} }, /* deck */
+	{ MODKEY,                       XK_Tab,     cyclelayouts,   { .i = +1 } },
+	{ MODKEY|ShiftMask,             XK_Tab,     cyclelayouts,   { .i = -1 } },
 
 	/* ------------ gaps ----------- */
 	{ MODKEY,                       XK_g,       togglegaps,     {0} }, /* toggle gaps */

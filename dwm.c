@@ -90,6 +90,7 @@ struct Client {
 	float mina, maxa;
 	float cfact;
 	int x, y, w, h;
+	int sfx, sfy, sfw, sfh; /* stored float geometry, used on mode revert */
 	int oldx, oldy, oldw, oldh;
 	int basew, baseh, incw, inch, maxw, maxh, minw, minh;
 	int bw, oldbw;
@@ -1138,6 +1139,10 @@ manage(Window w, XWindowAttributes *wa)
 	updatewindowtype(c);
 	updatesizehints(c);
 	updatewmhints(c);
+	c->sfx = c->x;
+	c->sfy = c->y;
+	c->sfw = c->w;
+	c->sfh = c->h;
 	XSelectInput(dpy, w, EnterWindowMask|FocusChangeMask|PropertyChangeMask|StructureNotifyMask);
 	grabbuttons(c, 0);
 	if (!c->isfloating)
@@ -2062,7 +2067,15 @@ togglefloating(const Arg *arg)
 		return;
 	c->isfloating = !c->isfloating || c->isfixed;
 	if (selmon->sel->isfloating)
-		resize(c, c->x, c->y, c->w, c->h, 0);
+		/* restore last known float dimensions */
+		resize(c, c->sfx, c->sfy, c->sfw, c->sfh, False);
+	else {
+		/* save last known float dimensions */
+		c->sfx = c->x;
+		c->sfy = c->y;
+		c->sfw = c->w;
+		c->sfh = c->h;
+	}
 	arrange(c->mon);
 }
 

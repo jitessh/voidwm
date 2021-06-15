@@ -148,6 +148,10 @@ static Key keys[] = {
 	/* ------------ bar ------------ */
 	{ MODKEY,                       XK_b,       togglebar,      {0} },
 
+	/* ------------ tag ------------ */
+	{ Mod1Mask,                     XK_Tab,     shiftviewclients, { .i = +1 } },
+	{ Mod1Mask|ShiftMask,           XK_Tab,     shiftviewclients, { .i = -1 } },
+
 	/* ---------- keyboard --------- */
 	{ 0,            XF86XK_AudioLowerVolume,    spawn,          SHCMD(vol_down) },
 	{ 0,            XF86XK_AudioRaiseVolume,    spawn,          SHCMD(vol_up)   },
@@ -161,7 +165,7 @@ static Key keys[] = {
 	{ MODKEY,                       XK_F3,      spawn,          SHCMD(APP_BROWSER_) },
 
 	/* ----------- other ----------- */
-	{ MODKEY,                       XK_Tab,     view,           {0} },
+	/* { MODKEY,                       XK_Tab,     view,           {0} }, */
 	{ MODKEY,                       XK_0,       view,           {.ui = ~0 } },
 	{ MODKEY|ShiftMask,             XK_0,       tag,            {.ui = ~0 } },
 

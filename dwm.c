@@ -1490,6 +1490,8 @@ manage(Window w, XWindowAttributes *wa)
 	updatewindowtype(c);
 	updatesizehints(c);
 	updatewmhints(c);
+	c->x = c->mon->mx + (c->mon->mw - WIDTH(c)) / 2;
+	c->y = c->mon->my + (bh + c->mon->mh - HEIGHT(c)) / 2;
 	c->sfx = c->x;
 	c->sfy = c->y;
 	c->sfw = c->w;

@@ -44,8 +44,9 @@ static const Rule rules[] = {
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
 	 */
-	/* class      instance    title       tags mask     isfloating   monitor */
-	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
+	/* class        instance    title           tags mask     isfloating   monitor    scratch key */
+	{ NULL,         NULL,       "scratchpad",   0,            1,           -1,       's' },
+	{ "Gimp",       NULL,       NULL,           0,            1,           -1,        0  },
 };
 
 /* ---------------- layouts -------------- */
@@ -92,6 +93,9 @@ static const Layout layouts[] = {
 /* --------------- commands -------------- */
 /* helper for spawning shell commands in the pre dwm-5.0 fashion */
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
+
+/*First arg only serves to match against key in rules*/
+static const char *scratchpadcmd[] = {"s", "st", "-t", "scratchpad", NULL};
 
 static const char *menucmd[] = { APP_MENU, NULL };
 static const char *termcmd[] = { APP_TERMINAL, NULL };
@@ -161,6 +165,11 @@ static Key keys[] = {
 	{ Mod1Mask|ShiftMask,           XK_Tab,     shiftviewclients, { .i = -1 } },
 	{ MODKEY,                       XK_r,       reorganizetags, {0} },
 	{ MODKEY|ShiftMask,             XK_r,       distributetags, {0} },
+
+	/* -------- scratchpad --------- */
+	{ MODKEY,                       XK_n,       setscratch,     {.v = scratchpadcmd } },
+	{ MODKEY|ShiftMask,             XK_n,       removescratch,  {.v = scratchpadcmd } },
+	{ MODKEY,                       XK_p,       togglescratch,  {.v = scratchpadcmd } },
 
 	/* ---------- keyboard --------- */
 	{ 0,            XF86XK_AudioLowerVolume,    spawn,          SHCMD(vol_down) },

@@ -29,6 +29,10 @@ static const char *colors[][3]      = {
 	[SchemeUrg]  = { col_gray4, col_cyan,  col_urgborder  },
 };
 
+/* ----------------- sticky -------------- */
+static const XPoint stickyicon[]    = { {0,0}, {4,0}, {4,8}, {2,6}, {0,8}, {0,0} }; /* represents the icon as an array of vertices */
+static const XPoint stickyiconbb    = {4,8};  /* defines the bottom right corner of the polygon's bounding box (speeds up scaling) */
+
 /* --------------- autostart ------------- */
 static const char autostartsh[]     = "autostart.sh";
 static const char autostartwaitsh[] = "autostartwait.sh";
@@ -134,6 +138,7 @@ static Key keys[] = {
 	/* ----------- stack ----------- */
 	{ MODKEY|ShiftMask,             XK_c,       killclient,     {0} },
 	{ MODKEY,                       XK_e,       focusurgent,    {0} },
+	{ MODKEY,                       XK_s,       togglesticky,   {0} },
 	{ MODKEY,                       XK_j,       focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,       focusstack,     {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_j,       rotatestack,    {.i = +1 } },

@@ -5,6 +5,7 @@
 static const char *fonts[]          = { "monospace:size=10" };
 static const unsigned int borderpx  = 2;        /* border pixel of windows */
 static const unsigned int snap      = 10;       /* snap pixel */
+static const int swallowfloating    = 0;        /* 1 means swallow floating windows by default */
 
 static       int smartgaps          = 0;        /* 1 means no outer gap when there is only one window */
 static const unsigned int gappih    = 10;       /* horiz inner gap between windows */
@@ -30,15 +31,24 @@ static const char pathfromhome[]    = ".config"; /* custom dir from $HOME if $XD
 /* ----------------- tags ---------------- */
 static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 
+/* --------------- defaults -------------- */
+#define APP_BROWSER     "firefox"
+#define APP_BROWSER_    "firefox --private-window"
+#define APP_MENU        "dmenu_run"
+#define APP_TERMINAL    "st"
+#define CLASS_TERMINAL  "St"
+
 /* ----------------- rules --------------- */
 static const Rule rules[] = {
 	/* xprop(1):
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
 	 */
-	/* class        instance    title           tags mask     isfloating   monitor    scratch key */
-	{ NULL,         NULL,       "scratchpad",   0,            1,           -1,       's' },
-	{ "Gimp",       NULL,       NULL,           0,            1,           -1,        0  },
+	/* class            instance    title           tags mask   isfloating  isterminal  noswallow   monitor scratchpad */
+	{ "Gimp",           NULL,       NULL,           0,          1,          0,          0,          -1,     0 },
+	{ "ScratchPad",     NULL,       "scratchpad",   0,          1,          1,          0,          -1,     's' },
+	{ CLASS_TERMINAL,   NULL,       NULL,           0,          0,          1,          0,          -1,     0 },
+	{ NULL,             NULL,       "Event Tester", 0,          0,          0,          1,          -1,     0 },
 };
 
 /* ---------------- layouts -------------- */
@@ -90,18 +100,12 @@ ResourcePref resources[] = {
 	{ MODKEY|ShiftMask,             KEY,      tag,            {.ui = 1 << TAG} }, \
 	{ MODKEY|ControlMask|ShiftMask, KEY,      toggletag,      {.ui = 1 << TAG} },
 
-/* --------------- defaults -------------- */
-#define APP_BROWSER     "firefox"
-#define APP_BROWSER_    "firefox --private-window"
-#define APP_MENU        "dmenu_run"
-#define APP_TERMINAL    "st"
-
 /* --------------- commands -------------- */
 /* helper for spawning shell commands in the pre dwm-5.0 fashion */
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
 /*First arg only serves to match against key in rules*/
-static const char *scratchpadcmd[] = {"s", "st", "-t", "scratchpad", NULL};
+static const char *scratchpadcmd[] = {"s", "st", "-c", "ScratchPad", "-t", "scratchpad", NULL};
 
 static const char *menucmd[] = { APP_MENU, NULL };
 static const char *termcmd[] = { APP_TERMINAL, NULL };

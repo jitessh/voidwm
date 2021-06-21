@@ -218,6 +218,7 @@ static void focusmon(const Arg *arg);
 static void focusstack(const Arg *arg);
 static void focusurgent(const Arg *arg);
 static Atom getatomprop(Client *c, Atom prop);
+static void getgaps(Monitor *m, int *oh, int *ov, int *ih, int *iv, unsigned int *nc);
 static pid_t getparentprocess(pid_t p);
 static int getrootptr(int *x, int *y);
 static long getstate(Window w);
@@ -283,6 +284,7 @@ static void togglebar(const Arg *arg);
 static void togglefakefullscreen(const Arg *arg);
 static void togglefloating(const Arg *arg);
 static void togglefullscreen(const Arg *arg);
+static void togglegaps(const Arg *arg);
 static void togglescratch(const Arg *arg);
 static void togglesticky(const Arg *arg);
 static void toggletag(const Arg *arg);
@@ -354,6 +356,9 @@ struct Pertag {
 	unsigned int curtag, prevtag; /* current and previous tag */
 	int nmasters[LENGTH(tags) + 1]; /* number of windows in master area */
 	float mfacts[LENGTH(tags) + 1]; /* mfacts per tag */
+	#if PERTAG_VANITYGAPS
+	int enablegaps[LENGTH(tags) + 1]; /* vanitygaps per tag */
+	#endif // PERTAG_VANITYGAPS
 	unsigned int sellts[LENGTH(tags) + 1]; /* selected layouts */
 	const Layout *ltidxs[LENGTH(tags) + 1][2]; /* matrix of tags and layouts indexes  */
 	int showbars[LENGTH(tags) + 1]; /* display bar for the current tag */
@@ -754,6 +759,10 @@ createmon(void)
 	for (i = 0; i <= LENGTH(tags); i++) {
 		m->pertag->nmasters[i] = m->nmaster;
 		m->pertag->mfacts[i] = m->mfact;
+
+		#if PERTAG_VANITYGAPS
+		m->pertag->enablegaps[i] = enablegaps;
+		#endif // PERTAG_VANITYGAPS
 
 		m->pertag->ltidxs[i][0] = m->lt[0];
 		m->pertag->ltidxs[i][1] = m->lt[1];
@@ -1367,6 +1376,29 @@ getatomprop(Client *c, Atom prop)
 		XFree(p);
 	}
 	return atom;
+}
+
+void
+getgaps(Monitor *m, int *oh, int *ov, int *ih, int *iv, unsigned int *nc)
+{
+	unsigned int n, oe, ie;
+	#if PERTAG_VANITYGAPS
+	oe = ie = selmon->pertag->enablegaps[selmon->pertag->curtag];
+	#else
+	oe = ie = enablegaps;
+	#endif // PERTAG_VANITYGAPS
+	Client *c;
+
+	for (n = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), n++);
+	if (smartgaps && n == 1) {
+		oe = 0; // outer gaps disabled when only one client
+	}
+
+	*oh = m->gappoh*oe; // outer horizontal gap
+	*ov = m->gappov*oe; // outer vertical gap
+	*ih = m->gappih*ie; // inner horizontal gap
+	*iv = m->gappiv*ie; // inner vertical gap
+	*nc = n;            // number of clients
 }
 
 pid_t
@@ -2944,6 +2976,17 @@ togglefullscreen(const Arg *arg)
 		setfullscreen(c, 1);
 	} else
 		setfullscreen(c, !c->isfullscreen);
+}
+
+void
+togglegaps(const Arg *arg)
+{
+	#if PERTAG_VANITYGAPS
+	selmon->pertag->enablegaps[selmon->pertag->curtag] = !selmon->pertag->enablegaps[selmon->pertag->curtag];
+	#else
+	enablegaps = !enablegaps;
+	#endif // PERTAG_VANITYGAPS
+	arrange(NULL);
 }
 
 void

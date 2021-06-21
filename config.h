@@ -8,6 +8,7 @@ static const unsigned int snap      = 10;       /* snap pixel */
 static const int swallowfloating    = 0;        /* 1 means swallow floating windows by default */
 
 static       int smartgaps          = 0;        /* 1 means no outer gap when there is only one window */
+static       int enablegaps         = 1;        /* 1 means enable gaps on startup */
 static const unsigned int gappih    = 10;       /* horiz inner gap between windows */
 static const unsigned int gappiv    = 10;       /* vert inner gap between windows */
 static const unsigned int gappoh    = 10;       /* horiz outer gap between windows and screen edge */
@@ -16,7 +17,10 @@ static const unsigned int gappov    = 10;       /* vert outer gap between window
 static       int barheight          = 25;       /* 0 means dwm will calculate bar height wrt font */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-#define VIEWONTAG 1                             /* switch view on tag switch */
+
+/* ----------------- patches ------------- */
+#define VIEWONTAG                   1           /* switch view on tag switch */
+#define PERTAG_VANITYGAPS           1           /* vanitygaps per tag */
 
 /* ----------------- sticky -------------- */
 static const XPoint stickyicon[]    = { {0,0}, {4,0}, {4,8}, {2,6}, {0,8}, {0,0} }; /* represents the icon as an array of vertices */

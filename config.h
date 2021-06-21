@@ -55,6 +55,26 @@ static const Rule rules[] = {
 	{ NULL,             NULL,       "Event Tester", 0,          0,          0,          1,          -1,     0 },
 };
 
+/* Bar rules allow you to configure what is shown where on the bar, as well as
+ * introducing your own bar modules.
+ *
+ *    monitor:
+ *      -1  show on all monitors
+ *       0  show on monitor 0
+ *      'A' show on active monitor (i.e. focused / selected) (or just -1 for active?)
+ *    bar - bar index, 0 is default, 1 is extrabar
+ *    alignment - how the module is aligned compared to other modules
+ *    widthfunc, drawfunc, clickfunc - providing bar module width, draw and click functions
+ *    name - does nothing, intended for visual clue and for logging / debugging
+ */
+static const BarRule barrules[] = {
+	/* monitor  bar    alignment         widthfunc              drawfunc              clickfunc           name */
+	{ -1,       0,     BAR_ALIGN_LEFT,   width_tags,            draw_tags,            click_tags,         "tags" },
+	{ -1,       0,     BAR_ALIGN_LEFT,   width_ltsymbol,        draw_ltsymbol,        click_ltsymbol,     "layout" },
+	{ 'A',      0,     BAR_ALIGN_RIGHT,  width_status,          draw_status,          click_status,       "status" },
+	{ -1,       0,     BAR_ALIGN_NONE,   width_wintitle,        draw_wintitle,        click_wintitle,     "wintitle" },
+};
+
 /* ---------------- layouts -------------- */
 static const float mfact     = 0.50; /* factor of master area size [0.05..0.95] */
 static const int nmaster     = 1;    /* number of clients in master area */

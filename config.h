@@ -26,10 +26,6 @@ static const int topbar             = 1;        /* 0 means bottom bar */
 static const unsigned int systrayspacing = 3;   /* systray spacing */
 static const int showsystray             = 1;   /* 0 means no systray */
 
-/* ----------------- sticky -------------- */
-static const XPoint stickyicon[]    = { {0,0}, {4,0}, {4,8}, {2,6}, {0,8}, {0,0} }; /* represents the icon as an array of vertices */
-static const XPoint stickyiconbb    = {4,8};  /* defines the bottom right corner of the polygon's bounding box (speeds up scaling) */
-
 /* --------------- autostart ------------- */
 static const char autostartsh[]     = "autostart.sh";
 static const char autostartwaitsh[] = "autostartwait.sh";

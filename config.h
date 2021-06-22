@@ -22,6 +22,10 @@ static const int topbar             = 1;        /* 0 means bottom bar */
 #define VIEWONTAG                   1           /* switch view on tag switch */
 #define PERTAG_VANITYGAPS           1           /* vanitygaps per tag */
 
+/* ---------------- systray -------------- */
+static const unsigned int systrayspacing = 3;   /* systray spacing */
+static const int showsystray             = 1;   /* 0 means no systray */
+
 /* ----------------- sticky -------------- */
 static const XPoint stickyicon[]    = { {0,0}, {4,0}, {4,8}, {2,6}, {0,8}, {0,0} }; /* represents the icon as an array of vertices */
 static const XPoint stickyiconbb    = {4,8};  /* defines the bottom right corner of the polygon's bounding box (speeds up scaling) */
@@ -71,6 +75,7 @@ static const BarRule barrules[] = {
 	/* monitor  bar    alignment         widthfunc              drawfunc              clickfunc           name */
 	{ -1,       0,     BAR_ALIGN_LEFT,   width_tags,            draw_tags,            click_tags,         "tags" },
 	{ -1,       0,     BAR_ALIGN_LEFT,   width_ltsymbol,        draw_ltsymbol,        click_ltsymbol,     "layout" },
+	{ 'A',      0,     BAR_ALIGN_RIGHT,  width_systray,         draw_systray,         click_systray,      "systray" },
 	{ 'A',      0,     BAR_ALIGN_RIGHT,  width_status,          draw_status,          click_status,       "status" },
 	{ -1,       0,     BAR_ALIGN_NONE,   width_wintitle,        draw_wintitle,        click_wintitle,     "wintitle" },
 };

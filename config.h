@@ -72,12 +72,12 @@ static const Rule rules[] = {
  *    name - does nothing, intended for visual clue and for logging / debugging
  */
 static const BarRule barrules[] = {
-	/* monitor  bar    alignment         widthfunc              drawfunc              clickfunc           name */
-	{ -1,       0,     BAR_ALIGN_LEFT,   width_tags,            draw_tags,            click_tags,         "tags" },
-	{ -1,       0,     BAR_ALIGN_LEFT,   width_ltsymbol,        draw_ltsymbol,        click_ltsymbol,     "layout" },
-	{ 'A',      0,     BAR_ALIGN_RIGHT,  width_systray,         draw_systray,         click_systray,      "systray" },
-	{ 'A',      0,     BAR_ALIGN_RIGHT,  width_status,          draw_status,          click_status,       "status" },
-	{ -1,       0,     BAR_ALIGN_NONE,   width_wintitle,        draw_wintitle,        click_wintitle,     "wintitle" },
+	/* monitor  bar    alignment                widthfunc              drawfunc              clickfunc           name */
+	{ -1,       0,     BAR_ALIGN_CENTER,        width_tags,            draw_tags,            click_tags,         "tags" },
+	{ -1,       0,     BAR_ALIGN_LEFT_LEFT,     width_ltsymbol,        draw_ltsymbol,        click_ltsymbol,     "layout" },
+	{ 'A',      0,     BAR_ALIGN_LEFT_LEFT,     width_systray,         draw_systray,         click_systray,      "systray" },
+	{ 'A',      0,     BAR_ALIGN_RIGHT_RIGHT,   width_status,          draw_status,          click_status,       "status" },
+	/* { -1,       0,     BAR_ALIGN_NONE,          width_wintitle,        draw_wintitle,        click_wintitle,     "wintitle" }, */
 };
 
 /* ---------------- layouts -------------- */

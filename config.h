@@ -32,8 +32,13 @@ static const char autostartwaitsh[] = "autostartwait.sh";
 static const char dwmdir[]          = "dwm";     /* parent dir of autostart(wait).sh */
 static const char pathfromhome[]    = ".config"; /* custom dir from $HOME if $XDG_CONFIG_HOME was not set; don't add leading & trailing '/' */
 
+/* ------------- occ indicator ----------- */
+static const unsigned int ulinepad      = 5;    /* horizontal padding between the underline and tag */
+static const unsigned int ulinestroke   = 2;    /* underline thickness */
+static const unsigned int ulinevoffset  = 0;    /* how far above the bottom of the bar the line should appear */
+
 /* ----------------- tags ---------------- */
-static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
+static const char *tags[] = { "", "", "", "", "", "", "", "", "" };
 
 /* --------------- defaults -------------- */
 #define APP_BROWSER     "firefox"

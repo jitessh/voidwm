@@ -22,9 +22,9 @@ static const int topbar             = 1;        /* 0 means bottom bar */
 #define VIEWONTAG                   1           /* switch view on tag switch */
 #define PERTAG_VANITYGAPS           1           /* vanitygaps per tag */
 
-/* ----------------- sticky -------------- */
-static const XPoint stickyicon[]    = { {0,0}, {4,0}, {4,8}, {2,6}, {0,8}, {0,0} }; /* represents the icon as an array of vertices */
-static const XPoint stickyiconbb    = {4,8};  /* defines the bottom right corner of the polygon's bounding box (speeds up scaling) */
+/* ---------------- systray -------------- */
+static const unsigned int systrayspacing = 3;   /* systray spacing */
+static const int showsystray             = 1;   /* 0 means no systray */
 
 /* --------------- autostart ------------- */
 static const char autostartsh[]     = "autostart.sh";
@@ -32,8 +32,13 @@ static const char autostartwaitsh[] = "autostartwait.sh";
 static const char dwmdir[]          = "dwm";     /* parent dir of autostart(wait).sh */
 static const char pathfromhome[]    = ".config"; /* custom dir from $HOME if $XDG_CONFIG_HOME was not set; don't add leading & trailing '/' */
 
+/* ------------- occ indicator ----------- */
+static const unsigned int ulinepad      = 5;    /* horizontal padding between the underline and tag */
+static const unsigned int ulinestroke   = 2;    /* underline thickness */
+static const unsigned int ulinevoffset  = 0;    /* how far above the bottom of the bar the line should appear */
+
 /* ----------------- tags ---------------- */
-static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
+static const char *tags[] = { "", "", "", "", "", "", "", "", "" };
 
 /* --------------- defaults -------------- */
 #define APP_BROWSER     "firefox"
@@ -53,6 +58,27 @@ static const Rule rules[] = {
 	{ "ScratchPad",     NULL,       "scratchpad",   0,          1,          1,          0,          -1,     's' },
 	{ CLASS_TERMINAL,   NULL,       NULL,           0,          0,          1,          0,          -1,     0 },
 	{ NULL,             NULL,       "Event Tester", 0,          0,          0,          1,          -1,     0 },
+};
+
+/* Bar rules allow you to configure what is shown where on the bar, as well as
+ * introducing your own bar modules.
+ *
+ *    monitor:
+ *      -1  show on all monitors
+ *       0  show on monitor 0
+ *      'A' show on active monitor (i.e. focused / selected) (or just -1 for active?)
+ *    bar - bar index, 0 is default, 1 is extrabar
+ *    alignment - how the module is aligned compared to other modules
+ *    widthfunc, drawfunc, clickfunc - providing bar module width, draw and click functions
+ *    name - does nothing, intended for visual clue and for logging / debugging
+ */
+static const BarRule barrules[] = {
+	/* monitor  bar    alignment                widthfunc              drawfunc              clickfunc           name */
+	{ -1,       0,     BAR_ALIGN_CENTER,        width_tags,            draw_tags,            click_tags,         "tags" },
+	{ -1,       0,     BAR_ALIGN_LEFT_LEFT,     width_ltsymbol,        draw_ltsymbol,        click_ltsymbol,     "layout" },
+	{ -1,       0,     BAR_ALIGN_LEFT_LEFT,     width_wintitle,        draw_wintitle,        click_wintitle,     "wintitle" },
+	{ 'A',      0,     BAR_ALIGN_RIGHT_RIGHT,   width_systray,         draw_systray,         click_systray,      "systray" },
+	{ 'A',      0,     BAR_ALIGN_RIGHT_RIGHT,   width_status,          draw_status,          click_status,       "status" },
 };
 
 /* ---------------- layouts -------------- */

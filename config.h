@@ -2,29 +2,29 @@
 
 /* -------------- appearance ------------- */
 #include "colors.h"
-static const char *fonts[]          = { "monospace:size=10" };
-static const unsigned int borderpx  = 2;        /* border pixel of windows */
-static const unsigned int snap      = 10;       /* snap pixel */
-static const int swallowfloating    = 0;        /* 1 means swallow floating windows by default */
+static const char *fonts[]      = { "monospace:size=10" };
+static unsigned int borderpx    = 2;        /* border pixel of windows */
+static unsigned int snap        = 10;       /* snap pixel */
+static int swallowfloating      = 0;        /* 1 means swallow floating windows by default */
 
-static       int smartgaps          = 0;        /* 1 means no outer gap when there is only one window */
-static       int enablegaps         = 1;        /* 1 means enable gaps on startup */
-static const unsigned int gappih    = 10;       /* horiz inner gap between windows */
-static const unsigned int gappiv    = 10;       /* vert inner gap between windows */
-static const unsigned int gappoh    = 10;       /* horiz outer gap between windows and screen edge */
-static const unsigned int gappov    = 10;       /* vert outer gap between windows and screen edge */
+static          int smartgaps   = 0;        /* 1 means no outer gap when there is only one window */
+static          int enablegaps  = 1;        /* 1 means enable gaps on startup */
+static unsigned int gappih      = 10;       /* horiz inner gap between windows */
+static unsigned int gappiv      = 10;       /* vert inner gap between windows */
+static unsigned int gappoh      = 10;       /* horiz outer gap between windows and screen edge */
+static unsigned int gappov      = 10;       /* vert outer gap between windows and screen edge */
 
-static       int barheight          = 25;       /* 0 means dwm will calculate bar height wrt font */
-static const int showbar            = 1;        /* 0 means no bar */
-static const int topbar             = 1;        /* 0 means bottom bar */
+static int barheight            = 25;       /* 0 means dwm will calculate bar height wrt font */
+static int showbar              = 1;        /* 0 means no bar */
+static int topbar               = 1;        /* 0 means bottom bar */
 
 /* ----------------- patches ------------- */
-#define VIEWONTAG                   1           /* switch view on tag switch */
-#define PERTAG_VANITYGAPS           1           /* vanitygaps per tag */
+#define VIEWONTAG               1           /* switch view on tag switch */
+#define PERTAG_VANITYGAPS       1           /* vanitygaps per tag */
 
 /* ---------------- systray -------------- */
-static const unsigned int systrayspacing = 3;   /* systray spacing */
-static const int showsystray             = 1;   /* 0 means no systray */
+static unsigned int systrayspacing  = 3;   /* systray spacing */
+static          int showsystray     = 1;   /* 0 means no systray */
 
 /* --------------- autostart ------------- */
 static const char autostartsh[]     = "autostart.sh";
@@ -120,6 +120,13 @@ ResourcePref resources[] = {
 		{ "color1",     STRING,  &urg_bg },
 		{ "color1",     STRING,  &urg_border },
 		{ "barheight",  INTEGER, &barheight },
+		{ "showbar",    INTEGER, &showbar },
+		{ "topbar",     INTEGER, &topbar },
+		{ "borderpx",   INTEGER, &borderpx },
+		{ "snap",       INTEGER, &snap },
+		{ "enablegaps", INTEGER, &enablegaps },
+		{ "smartgaps",  INTEGER, &smartgaps },
+		{ "showsystray",INTEGER, &showsystray },
 };
 
 /* ----------- key definitions ----------- */
@@ -148,10 +155,9 @@ static const char vol_mute[]  =  "pactl set-sink-mute 0 toggle; kill -44 $(pidof
 static Key keys[] = {
 	/* modifier                     key         function        argument */
 	{ MODKEY,                       XK_Return,  spawn,          {.v = termcmd } },
-	{ MODKEY,                       XK_space,   spawn,          {.v = termcmd } }, /* one handed mode */
 	{ MODKEY,                       XK_d,       spawn,          {.v = menucmd } },
-	{ MODKEY|ShiftMask,             XK_q,       xrdb,           {.v = NULL } },
-	{ MODKEY,                       XK_q,       quit,           {1} },
+	{ MODKEY,                       XK_q,       xrdb,           {.v = NULL } },
+	{ MODKEY|ShiftMask,             XK_q,       quit,           {1} },
 	{ MODKEY|ControlMask,           XK_q,       quit,           {0} },
 
 	/* ---------- layouts ---------- */
@@ -190,6 +196,7 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_period,  tagmon,         {.i = +1 } },
 
 	/* ----------- resize ---------- */
+	{ MODKEY,                       XK_space,   togglefloating,          {0} },
 	{ MODKEY,                       XK_f,       togglefullscreen,        {0} },
 	{ MODKEY|ShiftMask,             XK_f,       togglefakefullscreen,    {0} },
 	{ MODKEY|ControlMask,           XK_h,       setmfact,       {.f = -0.05} },
@@ -197,7 +204,6 @@ static Key keys[] = {
 	{ MODKEY|ControlMask,           XK_k,       setcfact,       {.f = +0.05} },
 	{ MODKEY|ControlMask,           XK_l,       setmfact,       {.f = +0.05} },
 	{ MODKEY|ControlMask,           XK_g,       setcfact,       {.f =  0.00} },
-	{ MODKEY|ShiftMask,             XK_space,   togglefloating, {0} },
 
 	/* ------------ bar ------------ */
 	{ MODKEY,                       XK_b,       togglebar,      {0} },
@@ -220,6 +226,9 @@ static Key keys[] = {
 	{ MODKEY,       XK_bracketleft,             spawn,          SHCMD(vol_down) },
 	{ MODKEY,       XK_bracketright,            spawn,          SHCMD(vol_up)   },
 	{ MODKEY,       XK_backslash,               spawn,          SHCMD(vol_mute) },
+	{ MODKEY|ShiftMask, XK_bracketleft,         spawn,          SHCMD("xbacklight -dec 10") },
+	{ MODKEY|ShiftMask, XK_bracketright,        spawn,          SHCMD("xbacklight -inc 10") },
+	{ MODKEY|ShiftMask, XK_backslash,           spawn,          SHCMD("xbacklight -set 50") },
 
 	/* ------------ apps ----------- */
 	{ MODKEY,                       XK_F2,      spawn,          SHCMD(APP_BROWSER) },

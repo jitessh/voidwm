@@ -110,14 +110,14 @@ static const Layout layouts[] = {
 
 /* --------------- Xresources ------------ */
 ResourcePref resources[] = {
-		{ "color15",    STRING,  &norm_fg },
+		{ "color7",     STRING,  &norm_fg },
 		{ "color0",     STRING,  &norm_bg },
-		{ "color8",     STRING,  &norm_border },
-		{ "color0",     STRING,  &sel_fg },
-		{ "color4",     STRING,  &sel_bg },
+		{ "color0",     STRING,  &norm_border },
+		{ "color4",     STRING,  &sel_fg },
+		{ "color0",     STRING,  &sel_bg },
 		{ "color4",     STRING,  &sel_border },
-		{ "color15",    STRING,  &urg_fg },
-		{ "color1",     STRING,  &urg_bg },
+		{ "color1",     STRING,  &urg_fg },
+		{ "color0",     STRING,  &urg_bg },
 		{ "color1",     STRING,  &urg_border },
 		{ "barheight",  INTEGER, &barheight },
 		{ "showbar",    INTEGER, &showbar },

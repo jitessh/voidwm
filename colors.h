@@ -9,16 +9,33 @@
 /* urg_bg      : bg color of urgent tags                       : (color1)  urgent color    same as urg_border */
 /* urg_border  : border color of urgent clients                : (color1)  urgent color    same as urg_bg */
 
-/* ------------ gruvbox theme ------------- */
-static char norm_fg[]           = "#ebdbb2";
-static char norm_bg[]           = "#282828";
-static char norm_border[]       = "#928374";
-static char sel_fg[]            = "#282828";
-static char sel_bg[]            = "#458588";
-static char sel_border[]        = "#458588";
-static char urg_fg[]            = "#ebdbb2";
-static char urg_bg[]            = "#cc241d";
-static char urg_border[]        = "#cc241d";
+/* /1* ------------ gruvbox theme ------------- *1/ */
+/* static char norm_fg[]           = "#ebdbb2"; */
+/* static char norm_bg[]           = "#282828"; */
+/* static char norm_border[]       = "#928374"; */
+/* static char sel_fg[]            = "#282828"; */
+/* static char sel_bg[]            = "#458588"; */
+/* static char sel_border[]        = "#458588"; */
+/* static char urg_fg[]            = "#ebdbb2"; */
+/* static char urg_bg[]            = "#cc241d"; */
+/* static char urg_border[]        = "#cc241d"; */
+/* static char *colors[][3]        = { */
+/*     /1*               fg           bg         border     *1/ */
+/*     [SchemeNorm] = { norm_fg,     norm_bg,   norm_border }, */
+/*     [SchemeSel]  = { sel_fg,      sel_bg,    sel_border }, */
+/*     [SchemeUrg] =  { urg_fg,      urg_bg,    urg_border }, */
+/* }; */
+
+/* ------------ amarena theme ------------- */
+static char norm_fg[]           = "#FFFFFF";
+static char norm_bg[]           = "#1A2026";
+static char norm_border[]       = "#526170";
+static char sel_fg[]            = "#4CB9D6";
+static char sel_bg[]            = "#1A2026";
+static char sel_border[]        = "#4CB9D6";
+static char urg_fg[]            = "#F92D72";
+static char urg_bg[]            = "#1A2026";
+static char urg_border[]        = "#F92D72";
 static char *colors[][3]        = {
     /*               fg           bg         border     */
     [SchemeNorm] = { norm_fg,     norm_bg,   norm_border },

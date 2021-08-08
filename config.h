@@ -2,7 +2,7 @@
 
 /* -------------- appearance ------------- */
 #include "colors.h"
-static const char *fonts[]      = { "monospace:size=10" };
+static const char *fonts[]      = { "JetBrainsMono Nerd Font Mono:style=medium:size=10", "Material Icons:size=10" };
 static unsigned int borderpx    = 2;        /* border pixel of windows */
 static unsigned int snap        = 10;       /* snap pixel */
 static int swallowfloating      = 0;        /* 1 means swallow floating windows by default */
@@ -23,8 +23,8 @@ static int topbar               = 1;        /* 0 means bottom bar */
 #define PERTAG_VANITYGAPS       1           /* vanitygaps per tag */
 
 /* ---------------- systray -------------- */
-static unsigned int systrayspacing  = 3;   /* systray spacing */
-static          int showsystray     = 1;   /* 0 means no systray */
+static unsigned int systrayspacing  = 3;    /* systray spacing */
+static          int showsystray     = 1;    /* 0 means no systray */
 
 /* --------------- autostart ------------- */
 static const char autostartsh[]     = "autostart.sh";
@@ -38,7 +38,7 @@ static const unsigned int ulinestroke   = 2;    /* underline thickness */
 static const unsigned int ulinevoffset  = 0;    /* how far above the bottom of the bar the line should appear */
 
 /* ----------------- tags ---------------- */
-static const char *tags[] = { "", "", "", "", "", "", "", "", "" };
+static const char *tags[] = { "", "", "", "", "", "", "" };
 
 /* --------------- defaults -------------- */
 #define APP_BROWSER     "firefox"
@@ -82,29 +82,26 @@ static const BarRule barrules[] = {
 };
 
 /* ---------------- layouts -------------- */
-static const float mfact     = 0.50; /* factor of master area size [0.05..0.95] */
-static const int nmaster     = 1;    /* number of clients in master area */
-static const int resizehints = 0;    /* 1 means respect size hints in tiled resizals */
+static const float mfact     = 0.50;        /* factor of master area size [0.05..0.95] */
+static const int nmaster     = 1;           /* number of clients in master area */
+static const int resizehints = 0;           /* 1 means respect size hints in tiled resizals */
 
-#define FORCE_VSPLIT 1  /* nrowgrid layout: force two clients to always split vertically */
+#define FORCE_VSPLIT 1                      /* nrowgrid layout: force two clients to always split vertically */
 #include "vanitygaps.c"
 
 static const Layout layouts[] = {
     /* symbol   arrange function */
-    { "[T]",    tile },                     /* Default: Master on left, Slaves on right */
-    { "[B]",    bstack },                   /* Master on top, Slaves on bottom */
-    { "[G]",    grid },                     /* Grid layout */
-    { "|G|",    gaplessgrid },              /* Grid layout but without gaps */
-    { "[C]",    centeredmaster },           /* Master in middle, Slaves on sides */
-    { "|C|",    centeredfloatingmaster },   /* Same as centeredmaster but Master floats */
-    { "[M]",    monocle },                  /* All windows on top of each other */
-    { "[D]",    deck },                     /* Master on left, Slaves in monocle-like mode on right */
-    { "[@]",    spiral },                   /* Fibonacci spiral */
-    { "|@|",    dwindle },                  /* Decreasing in size right and leftward */
-    /* { "(G)",    nrowgird },                 /1* nrowgird layout *1/ */
-    /* { "!G!",    horizgrid },                /1* horizgrid layout *1/ */
-    /* { "|B|",    bstackhoriz },              /1* bstackhoriz layout *1/ */
-    { "[-]",    NULL },                     /* No layout function means floating behaviour */
+    { "",    tile },                     /* Default: Master on left, Slaves on right */
+    { "",    bstack },                   /* Master on top, Slaves on bottom */
+    { "",    grid },                     /* Grid layout */
+    { "",    gaplessgrid },              /* Grid layout but without gaps */
+    { "",    centeredmaster },           /* Master in middle, Slaves on sides */
+    { "",    centeredfloatingmaster },   /* Same as centeredmaster but Master floats */
+    { "",    monocle },                  /* All windows on top of each other */
+    { "",    deck },                     /* Master on left, Slaves in monocle-like mode on right */
+    { "",    spiral },                   /* Fibonacci spiral */
+    { "",    dwindle },                  /* Decreasing in size right and leftward */
+    { "",    NULL },                     /* No layout function means floating behaviour */
     { NULL,     NULL },
 };
 
@@ -141,7 +138,7 @@ ResourcePref resources[] = {
 /* helper for spawning shell commands in the pre dwm-5.0 fashion */
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
-/*First arg only serves to match against key in rules*/
+/* first arg only serves to match against key in rules */
 static const char *scratchpadcmd[] = {"s", "st", "-c", "ScratchPad", "-t", "scratchpad", NULL};
 
 static const char *menucmd[] = { APP_MENU, NULL };
@@ -247,8 +244,8 @@ static Key keys[] = {
 	TAGKEYS(                        XK_5,                      4)
 	TAGKEYS(                        XK_6,                      5)
 	TAGKEYS(                        XK_7,                      6)
-	TAGKEYS(                        XK_8,                      7)
-	TAGKEYS(                        XK_9,                      8)
+	/* TAGKEYS(                        XK_8,                      7) */
+	/* TAGKEYS(                        XK_9,                      8) */
 };
 
 /* button definitions */

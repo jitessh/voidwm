@@ -2356,7 +2356,7 @@ replaceclient(Client *old, Client *new)
 
 	XMoveWindow(dpy, old->win, WIDTH(old) * -2, old->y);
 
-	if (ISVISIBLE(new)) {
+	if (ISVISIBLE(new) && !new->isfullscreen) {
 		if (new->isfloating)
 			resize(new, old->x, old->y, new->w - 2*new->bw, new->h - 2*new->bw, 0);
 		else
@@ -3102,6 +3102,9 @@ swallow(Client *t, Client *c)
 		return 0;
 	if (!swallowfloating && c->isfloating)
 		return 0;
+
+	if (t->isfullscreen)
+		setfullscreen(c, 1);
 
 	replaceclient(t, c);
 	c->ignorecfgreqpos = 1;

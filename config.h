@@ -18,6 +18,10 @@ static int barheight            = 25;       /* 0 means dwm will calculate bar he
 static int showbar              = 1;        /* 0 means no bar */
 static int topbar               = 1;        /* 0 means bottom bar */
 
+enum showtab_modes              { showtab_never, showtab_auto, showtab_nmodes, showtab_always };
+static const int showtab        = showtab_auto;
+static const int toptab         = 1;
+
 /* ----------------- patches ------------- */
 #define VIEWONTAG               1           /* switch view on tag switch */
 #define PERTAG_VANITYGAPS       1           /* vanitygaps per tag */
@@ -210,6 +214,7 @@ static Key keys[] = {
 	{ Mod1Mask|ShiftMask,           XK_Tab,     shiftviewclients, { .i = -1 } },
 	{ MODKEY,                       XK_r,       reorganizetags, {0} },
 	{ MODKEY|ShiftMask,             XK_r,       distributetags, {0} },
+    { MODKEY,                       XK_a,       tabmode,        { -1 } },
 
 	/* -------- scratchpad --------- */
 	{ MODKEY,                       XK_n,       setscratch,     {.v = scratchpadcmd } },
@@ -275,4 +280,5 @@ static Button buttons[] = {
 	{ ClkTagBar,            0,              Button3,        toggleview,     {0} },
 	{ ClkTagBar,            MODKEY,         Button1,        tag,            {0} },
 	{ ClkTagBar,            MODKEY,         Button3,        toggletag,      {0} },
+    { ClkTagBar,            0,              Button1,        focuswin,       {0} },
 };

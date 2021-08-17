@@ -35,131 +35,227 @@ On start, dwm can start additional programs that may be specified in two special
 shell scripts (see the FILES section below), autostartwait.sh and
 autostart.sh. The former is executed first and dwm will wait for its
 termination before starting. The latter is executed in the background before
-dwm enters its handler loop.
-.P
-Either of these files may be omitted.
+dwm enters its handler loop. Either of these files may be omitted.
 .SH OPTIONS
-.TP
+.TP 30
 .B \-v
 prints version information to stderr, then exits.
 .SH USAGE
 .SS Status bar
-.TP
+.TP 30
 .B X root window name
 is read and displayed in the status text area. It can be set with the
 .BR xsetroot (1)
 command.
-.TP
-.B Button1
+.TP 30
+.B Left Click
 click on a tag label to display all windows with that tag, click on the layout
 label toggles between tiled and floating layout.
-.TP
-.B Button3
+.TP 30
+.B Right Click
 click on a tag label adds/removes all windows with that tag to/from the view.
-.TP
-.B Mod1\-Button1
+.TP 30
+.B Super\-Left Click
 click on a tag label applies that tag to the focused window.
-.TP
-.B Mod1\-Button3
+.TP 30
+.B Super\-Right Click
 click on a tag label adds/removes that tag to/from the focused window.
 .SS Keyboard commands
 .TP
-.B Mod1\-Shift\-Return
-Start
-.BR st(1).
-.TP
-.B Mod1\-p
+.B BASIC
+.TP 30
+.B Super\-Control\-q
+Quit dwm.
+.TP 30
+.B Super\-Shift\-q
+Restart dwm.
+.TP 30
+.B Super\-q
+Reload Xresources.
+.TP 30
+.B Super\-Return
+Launch
+.BR st(1)
+terminal.
+.TP 30
+.B Super\-d
 Spawn
 .BR dmenu(1)
 for launching other programs.
 .TP
-.B Mod1\-,
-Focus previous screen, if any.
+.B LAYOUTS
+.TP 30
+.B Super\-t
+Sets tile layout.
+.TP 30
+.B Super\-Shift\-t
+Sets gaplessgrid layout.
+.TP 30
+.B Super\-y
+Sets centeredmaster layout.
+.TP 30
+.B Super\-Shift\-y
+Sets deck layout.
+.TP 30
+.B Super\-Tab
+Cycle layouts.
+.TP 30
+.B Super\-Shift\-Tab
+Cycle layouts reverse.
 .TP
-.B Mod1\-.
-Focus next screen, if any.
-.TP
-.B Mod1\-Shift\-,
-Send focused window to previous screen, if any.
-.TP
-.B Mod1\-Shift\-.
-Send focused window to next screen, if any.
-.TP
-.B Mod1\-b
-Toggles bar on and off.
-.TP
-.B Mod1\-t
-Sets tiled layout.
-.TP
-.B Mod1\-f
-Sets floating layout.
-.TP
-.B Mod1\-m
-Sets monocle layout.
-.TP
-.B Mod1\-space
-Toggles between current and previous layout.
-.TP
-.B Mod1\-j
+.B STACK
+.TP 30
+.B Super\-Shift\-c
+Close focused window.
+.TP 30
+.B Super\-j
 Focus next window.
-.TP
-.B Mod1\-k
+.TP 30
+.B Super\-k
 Focus previous window.
-.TP
-.B Mod1\-i
+.TP 30
+.B Super\-Shift\-j
+Move focused window down in stack.
+.TP 30
+.B Super\-Shift\-k
+Move focused window up in stack.
+.TP 30
+.B Super\-e
+Focus urgent window.
+.TP 30
+.B Super\-s
+Toggle focused window as sticky.
+.TP 30
+.B Super\-m
 Increase number of windows in master area.
-.TP
-.B Mod1\-d
+.TP 30
+.B Super\-Shift\-m
 Decrease number of windows in master area.
 .TP
-.B Mod1\-l
+.B MONITOR
+.TP 30
+.B Super\-,
+Focus previous screen.
+.TP 30
+.B Super\-.
+Focus next screen.
+.TP 30
+.B Super\-Shift\-,
+Send focused window to previous screen.
+.TP 30
+.B Super\-Shift\-.
+Send focused window to next screen.
+.TP
+.B GAPS
+.TP 30
+.B Super\-g
+Toggle gaps.
+.TP 30
+.B Super\-Shift\-g
+Set default gaps.
+.TP 30
+.B Super\-\-
+Decrease outer gaps.
+.TP 30
+.B Super\-=
+Increase outer gaps.
+.TP 30
+.B Super\-Shift\-\-
+Decrease inner gaps.
+.TP 30
+.B Super\-Shift\-=
+Increase inner gaps.
+.TP 30
+.B Super\-Control\-\-
+Decrease all gaps.
+.TP 30
+.B Super\-Control\-=
+Increase all gaps.
+.TP
+.B RESIZE
+.TP 30
+.B Super\-space
+Toggle focused window between floating and tiled state.
+.TP 30
+.B Super\-f
+Toggle full screen.
+.TP 30
+.B Super\-Shift\-f
+Toggle fake full screen.
+.TP 30
+.B Super\-Control\-h
+Decrease master area size.
+.TP 30
+.B Super\-Control\-j
+Decrease stack area size.
+.TP 30
+.B Super\-Control\-k
+Increase stack area size.
+.TP 30
+.B Super\-Control\-l
 Increase master area size.
 .TP
-.B Mod1\-h
-Decrease master area size.
-.TP
-.B Mod1\-Return
-Zooms/cycles focused window to/from master area (tiled layouts only).
-.TP
-.B Mod1\-Shift\-c
-Close focused window.
-.TP
-.B Mod1\-Shift\-space
-Toggle focused window between tiled and floating state.
-.TP
-.B Mod1\-Tab
-Toggles to the previously selected tags.
-.TP
-.B Mod1\-Shift\-[1..n]
-Apply nth tag to focused window.
-.TP
-.B Mod1\-Shift\-0
-Apply all tags to focused window.
-.TP
-.B Mod1\-Control\-Shift\-[1..n]
-Add/remove nth tag to/from focused window.
-.TP
-.B Mod1\-[1..n]
+.B TAG
+.TP 30
+.B Super\-[1..n]
 View all windows with nth tag.
-.TP
-.B Mod1\-0
+.TP 30
+.B Super\-Shift\-[1..n]
+Apply and view nth tag to focused window.
+.TP 30
+.B Super\-0
 View all windows with any tag.
-.TP
-.B Mod1\-Control\-[1..n]
+.TP 30
+.B Super\-Shift\-0
+Apply all tags to focused window.
+.TP 30
+.B Super\-Control\-[1..n]
 Add/remove all windows with nth tag to/from the view.
+.TP 30
+.B Super\-Control\-Shift\-[1..n]
+Add/remove nth tag to/from focused window.
+.TP 30
+.B Super\-Tab
+Cycle tags.
+.TP 30
+.B Super\-Shift\-Tab
+Cycle tags reverse.
+.TP 30
+.B Super\-r
+Move all windows per tag to leftmost unoccupied tags.
+.TP 30
+.B Super\-Shift\-r
+Distribute all windows through the tags.
+.TP 30
+.B Super\-b
+Toggles bar on and off.
 .TP
-.B Mod1\-Shift\-q
-Quit dwm.
+.B SCRATCHPAD
+.TP 30
+.B Super\-p
+Toggle all windows with scratchpad tag.
+.TP 30
+.B Super\-n
+Apply scratchpad tag to focused window.
+.TP 30
+.B Super\-Shift\-n
+Remove scratchpad tag from focused window.
 .SS Mouse commands
-.TP
-.B Mod1\-Button1
-Move focused window while dragging. Tiled windows will be toggled to the floating state.
-.TP
-.B Mod1\-Button2
+.TP 30
+.B Super\-Left Click
+Change position of focused window in stack while dragging.
+.TP 30
+.B Super\-Shift\-Left Click
+Change size of master area while dragging.
+.TP 30
+.B Super\-Middle Click
 Toggles focused window between floating and tiled state.
-.TP
-.B Mod1\-Button3
+.TP 30
+.B Super\-Right Click
 Resize focused window while dragging. Tiled windows will be toggled to the floating state.
+.TP 30
+.B Super\-Shift\-Right Click
+Change size of stack area while dragging.
 .SH FILES
 The files containing programs to be started along with dwm are searched for in
 the following directories:
@@ -171,10 +267,10 @@ The first existing directory is scanned for any of the autostart files below. Yo
 a custom path from $HOME in config.h file. Change 'pathfromhome' variable to point to a valid
 directory from your $HOME directory. Don't add leading or trailing slashes (/) in the path specified.
 Make sure both the files are exectable if they exists.
-.TP 20
+.TP 30
 autostart.sh
 This file is started as a shell background process before dwm enters its handler loop.
-.TP 20
+.TP 30
 autostartwait.sh
 This file is started before any autostart.sh; dwm waits for its termination.
 .SH CUSTOMIZATION

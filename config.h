@@ -14,7 +14,8 @@ static unsigned int gappiv      = 10;       /* vert inner gap between windows */
 static unsigned int gappoh      = 10;       /* horiz outer gap between windows and screen edge */
 static unsigned int gappov      = 10;       /* vert outer gap between windows and screen edge */
 
-static int barheight            = 25;       /* 0 means dwm will calculate bar height wrt font */
+#define BARHEIGHT_STR           "27"        /* dmenu_run's -h value, match with barheight below */
+static int barheight            = 27;       /* 0 means dwm will calculate bar height wrt font */
 static int showbar              = 1;        /* 0 means no bar */
 static int topbar               = 1;        /* 0 means bottom bar */
 
@@ -33,9 +34,9 @@ static const char dwmdir[]          = "dwm";     /* parent dir of autostart(wait
 static const char pathfromhome[]    = ".config"; /* custom dir from $HOME if $XDG_CONFIG_HOME was not set; don't add leading & trailing '/' */
 
 /* ------------- occ indicator ----------- */
-static const unsigned int ulinepad      = 5;    /* horizontal padding between the underline and tag */
-static const unsigned int ulinestroke   = 2;    /* underline thickness */
-static const unsigned int ulinevoffset  = 0;    /* how far above the bottom of the bar the line should appear */
+static const unsigned int ulinepad      = 5;     /* horizontal padding between the underline and tag */
+static const unsigned int ulinestroke   = 2;     /* underline thickness */
+static const unsigned int ulinevoffset  = 0;     /* how far above the bottom of the bar the line should appear */
 
 /* ----------------- tags ---------------- */
 static const char *tags[] = { "", "", "", "", "", "", "" };
@@ -54,35 +55,35 @@ static const Rule rules[] = {
 	 *	WM_NAME(STRING) = title
 	 */
 	/* class            instance    title           tags mask   isfloating  isterminal  noswallow   monitor scratchpad */
-	{ "Gimp",           NULL,       NULL,           0,          1,          0,          0,          -1,     0 },
+	{ "Gimp",           NULL,       NULL,           0,          1,          0,          0,          -1,     0   },
 	{ "ScratchPad",     NULL,       "scratchpad",   0,          1,          1,          0,          -1,     's' },
-	{ CLASS_TERMINAL,   NULL,       NULL,           0,          0,          1,          0,          -1,     0 },
-	{ NULL,             NULL,       "Event Tester", 0,          0,          0,          1,          -1,     0 },
+	{ CLASS_TERMINAL,   NULL,       NULL,           0,          0,          1,          0,          -1,     0   },
+	{ NULL,             NULL,       "Event Tester", 0,          0,          0,          1,          -1,     0   },
 };
 
-/* Bar rules allow you to configure what is shown where on the bar, as well as
- * introducing your own bar modules.
- *
- *    monitor:
- *      -1  show on all monitors
- *       0  show on monitor 0
- *      'A' show on active monitor (i.e. focused / selected) (or just -1 for active?)
- *    bar - bar index, 0 is default, 1 is extrabar
- *    alignment - how the module is aligned compared to other modules
- *    widthfunc, drawfunc, clickfunc - providing bar module width, draw and click functions
- *    name - does nothing, intended for visual clue and for logging / debugging
- */
+/* ------------- barmodules -------------- */
 static const BarRule barrules[] = {
+	/* Bar rules allow you to configure what is shown where on the bar, as well as
+	 * introducing your own bar modules.
+	 *
+	 *    monitor:
+	 *      -1  show on all monitors
+	 *       0  show on monitor 0
+	 *      'A' show on active monitor (i.e. focused / selected) (or just -1 for active?)
+	 *    bar - bar index, 0 is default, 1 is extrabar
+	 *    alignment - how the module is aligned compared to other modules
+	 *    widthfunc, drawfunc, clickfunc - providing bar module width, draw and click functions
+	 *    name - does nothing, intended for visual clue and for logging / debugging
+	 */
 	/* monitor  bar    alignment                widthfunc              drawfunc              clickfunc           name */
 	{ -1,       0,     BAR_ALIGN_CENTER,        width_tags,            draw_tags,            click_tags,         "tags"     },
 	{ -1,       0,     BAR_ALIGN_LEFT_LEFT,     width_ltsymbol,        draw_ltsymbol,        click_ltsymbol,     "layout"   },
-	{ -1,       0,     BAR_ALIGN_LEFT_LEFT,     width_wintitle,        draw_wintitle,        click_wintitle,     "wintitle" },
+	/* { -1,       0,     BAR_ALIGN_LEFT_LEFT,     width_wintitle,        draw_wintitle,        click_wintitle,     "wintitle" }, */
 	{ 'A',      0,     BAR_ALIGN_RIGHT_RIGHT,   width_systray,         draw_systray,         click_systray,      "systray"  },
 	{ 'A',      0,     BAR_ALIGN_RIGHT_RIGHT,   width_status2d,        draw_status2d,        click_status2d,     "status2d" },
-	/* { 'A',      0,     BAR_ALIGN_RIGHT_RIGHT,   width_status,          draw_status,          click_status,       "status" }, */
+	/* { 'A',      0,     BAR_ALIGN_RIGHT_RIGHT,   width_status,          draw_status,          click_status,       "status"   }, */
 };
 
-/* ---------------- layouts -------------- */
 static const float mfact     = 0.50;        /* factor of master area size [0.05..0.95] */
 static const int nmaster     = 1;           /* number of clients in master area */
 static const int resizehints = 0;           /* 1 means respect size hints in tiled resizals */
@@ -90,19 +91,20 @@ static const int resizehints = 0;           /* 1 means respect size hints in til
 #define FORCE_VSPLIT 1                      /* nrowgrid layout: force two clients to always split vertically */
 #include "vanitygaps.c"
 
+/* ---------------- layouts -------------- */
 static const Layout layouts[] = {
     /* symbol   arrange function */
-    { "",    tile },                     /* Default: Master on left, Slaves on right */
-    { "",    bstack },                   /* Master on top, Slaves on bottom */
-    { "",    grid },                     /* Grid layout */
-    { "",    gaplessgrid },              /* Grid layout but without gaps */
-    { "",    centeredmaster },           /* Master in middle, Slaves on sides */
-    { "",    centeredfloatingmaster },   /* Same as centeredmaster but Master floats */
-    { "",    monocle },                  /* All windows on top of each other */
-    { "",    deck },                     /* Master on left, Slaves in monocle-like mode on right */
-    { "",    spiral },                   /* Fibonacci spiral */
-    { "",    dwindle },                  /* Decreasing in size right and leftward */
-    { "",    NULL },                     /* No layout function means floating behaviour */
+    { "",    tile },                       /* Default: Master on left, Slaves on right */
+    { "",    bstack },                     /* Master on top, Slaves on bottom */
+    { "",    grid },                       /* Grid layout */
+    { "",    gaplessgrid },                /* Grid layout but without gaps */
+    { "",    centeredmaster },             /* Master in middle, Slaves on sides */
+    { "",    centeredfloatingmaster },     /* Same as centeredmaster but Master floats */
+    { "",    monocle },                    /* All windows on top of each other */
+    { "",    deck },                       /* Master on left, Slaves in monocle-like mode on right */
+    { "",    spiral },                     /* Fibonacci spiral */
+    { "",    dwindle },                    /* Decreasing in size right and leftward */
+    { "",    NULL },                       /* No layout function means floating behaviour */
     { NULL,     NULL },
 };
 
@@ -142,19 +144,20 @@ ResourcePref resources[] = {
 /* first arg only serves to match against key in rules */
 static const char *scratchpadcmd[] = {"s", "st", "-c", "ScratchPad", "-t", "scratchpad", NULL};
 
-static const char *menucmd[] = { APP_MENU, NULL };
+static const char *menucmd[] = { APP_MENU, "-h", BARHEIGHT_STR, NULL };
 static const char *termcmd[] = { APP_TERMINAL, NULL };
 
 #include <X11/XF86keysym.h>
 static const char vol_up[]    =  "pactl set-sink-volume 0 +5%; kill -44 $(pidof dwmblocks)" ;
 static const char vol_down[]  =  "pactl set-sink-volume 0 -5%; kill -44 $(pidof dwmblocks)" ;
 static const char vol_mute[]  =  "pactl set-sink-mute 0 toggle; kill -44 $(pidof dwmblocks)";
+#define XCLIP_PNG                " | xclip -selection clipboard -target image/png"
 
 static Key keys[] = {
 	/* modifier                     key         function        argument */
 	{ MODKEY,                       XK_Return,  spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_d,       spawn,          {.v = menucmd } },
-	{ MODKEY,                       XK_q,       xrdb,           {.v = NULL } },
+	{ MODKEY,                       XK_q,       xrdb,           {.v = NULL    } },
 	{ MODKEY|ShiftMask,             XK_q,       quit,           {1} },
 	{ MODKEY|ControlMask,           XK_q,       quit,           {0} },
 
@@ -167,8 +170,8 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_Tab,     cyclelayouts,   { .i = -1 } },
 
 	/* ------------ gaps ----------- */
-	{ MODKEY,                       XK_g,       togglegaps,     {0} }, /* toggle gaps */
-	{ MODKEY|ShiftMask,             XK_g,       defaultgaps,    {0} }, /* reset gaps */
+	{ MODKEY,                       XK_g,       togglegaps,     {0} },        /* toggle gaps */
+	{ MODKEY|ShiftMask,             XK_g,       defaultgaps,    {0} },        /* reset gaps */
 	{ MODKEY,                       XK_minus,   incrogaps,      {.i = -3 } }, /* dec out gaps */
 	{ MODKEY,                       XK_equal,   incrogaps,      {.i = +3 } }, /* inc out gaps */
 	{ MODKEY|ShiftMask,             XK_minus,   incrigaps,      {.i = -3 } }, /* dec inr gaps */
@@ -218,6 +221,8 @@ static Key keys[] = {
 	{ MODKEY,                       XK_p,       togglescratch,  {.v = scratchpadcmd } },
 
 	/* ---------- keyboard --------- */
+	{ MODKEY,                       XK_a,       spawn,          SHCMD("maim -qu"  XCLIP_PNG) },
+	{ MODKEY|ShiftMask,             XK_a,       spawn,          SHCMD("maim -qus" XCLIP_PNG) },
 	{ 0,            XF86XK_AudioLowerVolume,    spawn,          SHCMD(vol_down) },
 	{ 0,            XF86XK_AudioRaiseVolume,    spawn,          SHCMD(vol_up)   },
 	{ 0,            XF86XK_AudioMute,           spawn,          SHCMD(vol_mute) },
@@ -229,7 +234,7 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask, XK_backslash,           spawn,          SHCMD("xbacklight -set 50") },
 
 	/* ------------ apps ----------- */
-	{ MODKEY,                       XK_F2,      spawn,          SHCMD(APP_BROWSER) },
+	{ MODKEY,                       XK_F2,      spawn,          SHCMD(APP_BROWSER)  },
 	{ MODKEY,                       XK_F3,      spawn,          SHCMD(APP_BROWSER_) },
 
 	/* ----------- other ----------- */

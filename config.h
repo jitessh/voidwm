@@ -74,11 +74,12 @@ static const Rule rules[] = {
  */
 static const BarRule barrules[] = {
 	/* monitor  bar    alignment                widthfunc              drawfunc              clickfunc           name */
-	{ -1,       0,     BAR_ALIGN_CENTER,        width_tags,            draw_tags,            click_tags,         "tags" },
-	{ -1,       0,     BAR_ALIGN_LEFT_LEFT,     width_ltsymbol,        draw_ltsymbol,        click_ltsymbol,     "layout" },
+	{ -1,       0,     BAR_ALIGN_CENTER,        width_tags,            draw_tags,            click_tags,         "tags"     },
+	{ -1,       0,     BAR_ALIGN_LEFT_LEFT,     width_ltsymbol,        draw_ltsymbol,        click_ltsymbol,     "layout"   },
 	{ -1,       0,     BAR_ALIGN_LEFT_LEFT,     width_wintitle,        draw_wintitle,        click_wintitle,     "wintitle" },
-	{ 'A',      0,     BAR_ALIGN_RIGHT_RIGHT,   width_systray,         draw_systray,         click_systray,      "systray" },
-	{ 'A',      0,     BAR_ALIGN_RIGHT_RIGHT,   width_status,          draw_status,          click_status,       "status" },
+	{ 'A',      0,     BAR_ALIGN_RIGHT_RIGHT,   width_systray,         draw_systray,         click_systray,      "systray"  },
+	{ 'A',      0,     BAR_ALIGN_RIGHT_RIGHT,   width_status2d,        draw_status2d,        click_status2d,     "status2d" },
+	/* { 'A',      0,     BAR_ALIGN_RIGHT_RIGHT,   width_status,          draw_status,          click_status,       "status" }, */
 };
 
 /* ---------------- layouts -------------- */

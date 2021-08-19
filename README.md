@@ -1,5 +1,11 @@
-# voidwm - Jitesh's dwm build
-dwm is an extremely fast, small, and dynamic window manager for X.
+<div align="center">
+    <h1>voidwm</h1>
+    <b>Jitesh's build of <a href="https://dwm.suckless.org/">dwm</a></b>
+    <p></p>
+</div>
+
+![dwm-preview-01](https://github.com/voidstarsh/aperture/raw/master/dwm-01.png)
+![dwm-preview-02](https://github.com/voidstarsh/aperture/raw/master/dwm-02.png)
 
 
 # Getting started

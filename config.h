@@ -1,7 +1,6 @@
 /* See LICENSE file for copyright and license details. */
 
 /* -------------- appearance ------------- */
-#include "colors.h"
 static const char *fonts[]      = { "JetBrainsMono Nerd Font Mono:style=medium:size=10", "Material Icons:size=10" };
 static unsigned int borderpx    = 2;        /* border pixel of windows */
 static unsigned int snap        = 10;       /* snap pixel */
@@ -18,6 +17,15 @@ static unsigned int gappov      = 10;       /* vert outer gap between windows an
 static int barheight            = 27;       /* 0 means dwm will calculate bar height wrt font */
 static int showbar              = 1;        /* 0 means no bar */
 static int topbar               = 1;        /* 0 means bottom bar */
+
+/* ------------- colorscheme ------------- */
+#include "colors/amarena.h"
+static char *colors[][3]        = {
+	/*               fg             bg              border  */
+	[SchemeNorm] = { foreground,    background,     color8  },
+	[SchemeSel]  = { color12,       background,     color12 },
+	[SchemeUrg]  = { color9,        background,     color9  },
+};
 
 /* ----------------- patches ------------- */
 #define VIEWONTAG               1           /* switch view on tag switch */
@@ -110,15 +118,24 @@ static const Layout layouts[] = {
 
 /* --------------- Xresources ------------ */
 ResourcePref resources[] = {
-		{ "color7",     STRING,  &norm_fg },
-		{ "color0",     STRING,  &norm_bg },
-		{ "color0",     STRING,  &norm_border },
-		{ "color4",     STRING,  &sel_fg },
-		{ "color0",     STRING,  &sel_bg },
-		{ "color4",     STRING,  &sel_border },
-		{ "color1",     STRING,  &urg_fg },
-		{ "color0",     STRING,  &urg_bg },
-		{ "color1",     STRING,  &urg_border },
+		{ "foreground", STRING,  &foreground },
+		{ "background", STRING,  &background },
+		{ "color0",     STRING,  &color0 },
+		{ "color8",     STRING,  &color8 },
+		{ "color1",     STRING,  &color1 },
+		{ "color9",     STRING,  &color9 },
+		{ "color2",     STRING,  &color2 },
+		{ "color10",    STRING,  &color10 },
+		{ "color3",     STRING,  &color3 },
+		{ "color11",    STRING,  &color11 },
+		{ "color4",     STRING,  &color4 },
+		{ "color12",    STRING,  &color12 },
+		{ "color5",     STRING,  &color5 },
+		{ "color13",    STRING,  &color13 },
+		{ "color6",     STRING,  &color6 },
+		{ "color14",    STRING,  &color14 },
+		{ "color7",     STRING,  &color7 },
+		{ "color15",    STRING,  &color15 },
 		{ "barheight",  INTEGER, &barheight },
 		{ "showbar",    INTEGER, &showbar },
 		{ "topbar",     INTEGER, &topbar },

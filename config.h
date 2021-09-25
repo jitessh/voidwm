@@ -1,7 +1,7 @@
 /* See LICENSE file for copyright and license details. */
 
 /* --------------- settings -------------- */
-static const char *fonts[]      = { "JetBrainsMono Nerd Font Mono:style=medium:size=10", "Material Icons:size=10" };
+static const char *fonts[]      = { "JetBrainsMono Nerd Font:style=medium:size=10", "monospace:size=10" };
 static unsigned int borderpx    = 2;        /* border pixel of windows */
 static unsigned int snap        = 10;       /* snap pixel */
 static int swallowfloating      = 0;        /* 1 means swallow floating windows by default */
@@ -33,7 +33,7 @@ static char *colors[][3]        = {
 };
 
 /* ----------------- tags ---------------- */
-static const char *tags[]       = { "", "", "", "", "", "", "" };
+static const char *tags[]       = { " ", " ", " ", " ", " ", " ", " " };
 
 /* --------------- patches --------------- */
 #define FORCE_VSPLIT            1           /* nrowgrid layout: force two clients to always split vertically */
@@ -102,17 +102,17 @@ static const BarRule barrules[] = {
 #include "vanitygaps.c"
 static const Layout layouts[]   = {
 	/* symbol   arrange function */
-	{ "",      tile },                     /* Default: Master on left, Slaves on right */
-	{ "",      bstack },                   /* Master on top, Slaves on bottom */
-	{ "",      grid },                     /* Grid layout */
-	{ "",      gaplessgrid },              /* Grid layout but without gaps */
-	{ "",      centeredmaster },           /* Master in middle, Slaves on sides */
-	{ "",      centeredfloatingmaster },   /* Same as centeredmaster but Master floats */
-	{ "",      monocle },                  /* All windows on top of each other */
-	{ "",      deck },                     /* Master on left, Slaves in monocle-like mode on right */
-	{ "",      spiral },                   /* Fibonacci spiral */
-	{ "",      dwindle },                  /* Decreasing in size right and leftward */
-	{ "",      NULL },                     /* No layout function means floating behaviour */
+	{ "[T]",    tile },                     /* Default: Master on left, Slaves on right */
+	{ "|B|",    bstack },                   /* Master on top, Slaves on bottom */
+	{ "[G]",    grid },                     /* Grid layout */
+	{ "|G|",    gaplessgrid },              /* Grid layout but without gaps */
+	{ "[C]",    centeredmaster },           /* Master in middle, Slaves on sides */
+	{ "|C|",    centeredfloatingmaster },   /* Same as centeredmaster but Master floats */
+	{ "[M]",    monocle },                  /* All windows on top of each other */
+	{ "|D|",    deck },                     /* Master on left, Slaves in monocle-like mode on right */
+	{ "[@]",    spiral },                   /* Fibonacci spiral */
+	{ "|@|",    dwindle },                  /* Decreasing in size right and leftward */
+	{ "[-]",    NULL },                     /* No layout function means floating behaviour */
 	{ NULL,     NULL },
 };
 
@@ -159,7 +159,7 @@ ResourcePref resources[]        = {
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
 /* first arg only serves to match against key in rules */
-static const char *scratchpadcmd[] = {"s", "st", "-c", "ScratchPad", "-t", "scratchpad", NULL};
+static const char *scratchpadcmd[] = { "s", "st", "-c", "ScratchPad", "-t", "scratchpad", NULL };
 
 static const char *menucmd[]    = { APP_MENU, "-h", BARHEIGHT_STR, NULL };
 static const char *termcmd[]    = { APP_TERMINAL, NULL };
@@ -180,12 +180,12 @@ static Key keys[]               = {
 	{ MODKEY|ControlMask,           XK_q,       quit,           {0} },
 
 	/* ---------- layouts ---------- */
-	{ MODKEY,                       XK_t,       setlayout,      {.v = &layouts[0]} }, /* tile */
-	{ MODKEY|ShiftMask,             XK_t,       setlayout,      {.v = &layouts[3]} }, /* gaplessgrid */
-	{ MODKEY,                       XK_y,       setlayout,      {.v = &layouts[4]} }, /* centeredmaster */
-	{ MODKEY|ShiftMask,             XK_y,       setlayout,      {.v = &layouts[7]} }, /* deck */
-	{ MODKEY,                       XK_Tab,     cyclelayouts,   { .i = +1 } },
-	{ MODKEY|ShiftMask,             XK_Tab,     cyclelayouts,   { .i = -1 } },
+	{ MODKEY,                       XK_t,       setlayout,      {.v = &layouts[0] } }, /* tile */
+	{ MODKEY|ShiftMask,             XK_t,       setlayout,      {.v = &layouts[3] } }, /* gaplessgrid */
+	{ MODKEY,                       XK_y,       setlayout,      {.v = &layouts[4] } }, /* centeredmaster */
+	{ MODKEY|ShiftMask,             XK_y,       setlayout,      {.v = &layouts[7] } }, /* deck */
+	{ MODKEY,                       XK_Tab,     cyclelayouts,   {.i = +1 } },
+	{ MODKEY|ShiftMask,             XK_Tab,     cyclelayouts,   {.i = -1 } },
 
 	/* ------------ gaps ----------- */
 	{ MODKEY,                       XK_g,       togglegaps,     {0} },        /* toggle  gaps */
@@ -215,21 +215,21 @@ static Key keys[]               = {
 	{ MODKEY|ShiftMask,             XK_period,  tagmon,         {.i = +1 } },
 
 	/* ----------- resize ---------- */
-	{ MODKEY,                       XK_space,   togglefloating,          {0} },
-	{ MODKEY,                       XK_f,       togglefullscreen,        {0} },
-	{ MODKEY|ShiftMask,             XK_f,       togglefakefullscreen,    {0} },
-	{ MODKEY|ControlMask,           XK_h,       setmfact,       {.f = -0.05} },
-	{ MODKEY|ControlMask,           XK_j,       setcfact,       {.f = -0.05} },
-	{ MODKEY|ControlMask,           XK_k,       setcfact,       {.f = +0.05} },
-	{ MODKEY|ControlMask,           XK_l,       setmfact,       {.f = +0.05} },
-	{ MODKEY|ControlMask,           XK_g,       setcfact,       {.f =  0.00} },
+	{ MODKEY,                       XK_space,   togglefloating,         {0} },
+	{ MODKEY,                       XK_f,       togglefullscreen,       {0} },
+	{ MODKEY|ShiftMask,             XK_f,       togglefakefullscreen,   {0} },
+	{ MODKEY|ControlMask,           XK_h,       setmfact,       {.f = -0.05 } },
+	{ MODKEY|ControlMask,           XK_j,       setcfact,       {.f = -0.05 } },
+	{ MODKEY|ControlMask,           XK_k,       setcfact,       {.f = +0.05 } },
+	{ MODKEY|ControlMask,           XK_l,       setmfact,       {.f = +0.05 } },
+	{ MODKEY|ControlMask,           XK_g,       setcfact,       {.f =  0.00 } },
 
 	/* ------------ bar ------------ */
 	{ MODKEY,                       XK_b,       togglebar,      {0} },
 
 	/* ------------ tag ------------ */
-	{ Mod1Mask,                     XK_Tab,     shiftviewclients, { .i = +1 } },
-	{ Mod1Mask|ShiftMask,           XK_Tab,     shiftviewclients, { .i = -1 } },
+	{ Mod1Mask,                     XK_Tab,     shiftviewclients, {.i = +1 } },
+	{ Mod1Mask|ShiftMask,           XK_Tab,     shiftviewclients, {.i = -1 } },
 	{ MODKEY,                       XK_r,       reorganizetags, {0} },
 	{ MODKEY|ShiftMask,             XK_r,       distributetags, {0} },
 
@@ -277,7 +277,7 @@ static Key keys[]               = {
 static Button buttons[]         = {
 	/* click                event mask      button          function        argument */
 	{ ClkLtSymbol,          0,              Button1,        setlayout,      {0} },
-	{ ClkLtSymbol,          0,              Button3,        setlayout,      {.v = &layouts[2]} },
+	{ ClkLtSymbol,          0,              Button3,        setlayout,      {.v = &layouts[2] } },
 	{ ClkWinTitle,          0,              Button2,        zoom,           {0} },
 	{ ClkStatusText,        0,              Button2,        spawn,          {.v = termcmd } },
 	/* placemouse options, choose which feels more natural:
@@ -290,7 +290,7 @@ static Button buttons[]         = {
 	 * to control these separately (i.e. to retain the feature to move a tiled window
 	 * into a floating position).
 	 */
-	{ ClkClientWin,         MODKEY,         Button1,        moveorplace,    {.i = 2} },
+	{ ClkClientWin,         MODKEY,         Button1,        moveorplace,    {.i = 2 } },
 	{ ClkClientWin,         MODKEY,         Button2,        togglefloating, {0} },
 	{ ClkClientWin,         MODKEY,         Button3,        resizemouse,    {0} },
 	{ ClkClientWin,         MODKEY|ShiftMask, Button3,      dragcfact,      {0} },

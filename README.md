@@ -4,8 +4,9 @@
     <p></p>
 </div>
 
-![dwm-preview-01](https://github.com/voidstarsh/aperture/raw/master/dwm-01.png)
-![dwm-preview-02](https://github.com/voidstarsh/aperture/raw/master/dwm-02.png)
+![dwm-preview-03](https://github.com/voidstarsh/aperture/raw/master/dwm-03.png)
+![dwm-preview-04](https://github.com/voidstarsh/aperture/raw/master/dwm-04.png)
+![dwm-preview-05](https://github.com/voidstarsh/aperture/raw/master/dwm-05.png)
 
 
 # Getting started
@@ -16,6 +17,7 @@ git clone https://github.com/voidstarsh/voidwm
 cd voidwm
 sudo make clean install
 ```
+- I've also got my build of [dwmblocks](https://github.com/voidstarsh/dwmblocks) (status bar for dwm).
 
 ## Running dwm
 ### Using startx
@@ -54,7 +56,7 @@ See [config.h](config.h) for various key bindings, layouts supported, and more. 
 - Make windows sticky with `Mod+s` (see [sticky](https://dwm.suckless.org/patches/sticky/)).
 - Restart dwm with `Mod+shift+q` (see [restartsig](https://dwm.suckless.org/patches/restartsig/)).
 - Swallow windows & allow exceptions (see [swallow](https://github.com/bakkeby/patches/wiki/swallow/)).
-- Seamless [pywal](https://github.com/dylanaraps/pywal/) support: change colors on the fly without restarting or exiting dwm with `Mod+F5` (modified [xrdb](https://dwm.suckless.org/patches/xrdb/): [diff](https://github.com/voidstarsh/voidwm/commit/10ba0c06ddd648bee6b9968b65d4addfd57d7ecf)).
+- Seamless [pywal](https://github.com/dylanaraps/pywal/) support: change colors on the fly without restarting or exiting dwm with `Mod+q` (modified [xrdb](https://dwm.suckless.org/patches/xrdb/): [diff](https://github.com/voidstarsh/voidwm/commit/10ba0c06ddd648bee6b9968b65d4addfd57d7ecf)).
 - To see list of all patches, run:
 ```bash
 git log --oneline | grep "patch++" | cut -c17-

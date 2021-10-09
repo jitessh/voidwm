@@ -27,9 +27,9 @@ static int topbar               = 1;        /* 0 means bottom bar */
 #include "colors/amarena.h"
 static char *colors[][3]        = {
 	/*               fg             bg              border  */
-	[SchemeNorm] = { foreground,    background,     color8  },
-	[SchemeSel]  = { color12,       background,     color12 },
-	[SchemeUrg]  = { color9,        background,     color9  },
+	[SchemeNorm] = { foreground,    background,     background  },
+	[SchemeSel]  = { color6,        background,     color6      },
+	[SchemeUrg]  = { color9,        background,     color9      },
 };
 
 /* ----------------- tags ---------------- */
@@ -159,7 +159,7 @@ ResourcePref resources[]        = {
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
 /* first arg only serves to match against key in rules */
-static const char *scratchpadcmd[] = { "s", "st", "-c", "ScratchPad", "-t", "scratchpad", NULL };
+static const char *scratchpadcmd[] = { "s", APP_TERMINAL, "-c", "ScratchPad", "-t", "scratchpad", NULL };
 
 static const char *menucmd[]    = { APP_MENU, "-h", BARHEIGHT_STR, NULL };
 static const char *termcmd[]    = { APP_TERMINAL, NULL };

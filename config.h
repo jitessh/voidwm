@@ -33,7 +33,7 @@ static char *colors[][3]        = {
 };
 
 /* ----------------- tags ---------------- */
-static const char *tags[]       = { " ", " ", " ", " ", " ", " ", " " };
+static const char *tags[]       = { " ", " ", "⭘ ", " ", " " };
 
 /* --------------- patches --------------- */
 #define FORCE_VSPLIT            1           /* nrowgrid layout: force two clients to always split vertically */
@@ -266,10 +266,6 @@ static Key keys[]               = {
 	TAGKEYS(                        XK_3,                      2)
 	TAGKEYS(                        XK_4,                      3)
 	TAGKEYS(                        XK_5,                      4)
-	TAGKEYS(                        XK_6,                      5)
-	TAGKEYS(                        XK_7,                      6)
-	/* TAGKEYS(                        XK_8,                      7) */
-	/* TAGKEYS(                        XK_9,                      8) */
 };
 
 /* ---------- button definitions --------- */

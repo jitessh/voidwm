@@ -71,7 +71,8 @@
 /* enums */
 enum { CurResizeBR, CurResizeBL, CurResizeTR, CurResizeTL,
        CurResizeHorzArrow, CurResizeVertArrow, CurIronCross, CurNormal, CurResize, CurMove, CurLast }; /* cursor */
-enum { SchemeNorm, SchemeSel, SchemeUrg }; /* color schemes */
+enum { SchemeNorm, SchemeSel, SchemeUrg,
+       SchemeTag, SchemeTag1, SchemeTag2, SchemeTag3, SchemeTag4, SchemeTag5 }; /* color schemes */
 enum { NetSupported, NetWMName, NetWMState, NetWMCheck,
        NetWMFullscreen, NetActiveWindow, NetWMWindowType,
        NetSystemTray, NetSystemTrayOP, NetSystemTrayOrientation,

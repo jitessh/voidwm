@@ -30,10 +30,18 @@ static char *colors[][3]        = {
 	[SchemeNorm] = { foreground,    background,     background  },
 	[SchemeSel]  = { color6,        background,     color6      },
 	[SchemeUrg]  = { color9,        background,     color9      },
+	[SchemeTag]  = { color8,        background,     background  },
+	[SchemeTag1] = { color5,        background,     background  },
+	[SchemeTag2] = { color4,        background,     background  },
+	[SchemeTag3] = { color3,        background,     background  },
+	[SchemeTag4] = { color2,        background,     background  },
+	[SchemeTag5] = { color1,        background,     background  },
 };
 
 /* ----------------- tags ---------------- */
-static const char *tags[]       = { " ", " ", " ", " ", " ", " ", " " };
+static const char *tags[]       = { " ", " ", "⭘ ", " ", " " };
+static const int tagschemes[]   = { SchemeTag1, SchemeTag2, SchemeTag3, SchemeTag4, SchemeTag5 };
+static const int rainbowtags    = 1;        /* 1 means rainbow tags */
 
 /* --------------- patches --------------- */
 #define FORCE_VSPLIT            1           /* nrowgrid layout: force two clients to always split vertically */
@@ -266,10 +274,6 @@ static Key keys[]               = {
 	TAGKEYS(                        XK_3,                      2)
 	TAGKEYS(                        XK_4,                      3)
 	TAGKEYS(                        XK_5,                      4)
-	TAGKEYS(                        XK_6,                      5)
-	TAGKEYS(                        XK_7,                      6)
-	/* TAGKEYS(                        XK_8,                      7) */
-	/* TAGKEYS(                        XK_9,                      8) */
 };
 
 /* ---------- button definitions --------- */

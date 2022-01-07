@@ -30,7 +30,8 @@ draw_tags(Bar *bar, BarDrawArg *a)
 		/* rainbowtags if enabled and tag occupied (otherwise SchemeSel); SchemeNorm if tag selected and empty; SchemeTag for rest empty & inactive tags */
 		drw_setscheme(drw, scheme[occ & 1 << i ? (rainbowtags ? tagschemes[i] : SchemeSel) : (m->tagset[m->seltags] & 1 << i ? SchemeNorm : SchemeTag)]);
 		drw_text(drw, x, 0, w, bh, lrpad / 2, tags[i], invert);
-		if (occ & 1 << i)
+		/* underline on active occupied tag only */
+		if ((m->tagset[m->seltags] & 1 << i) && (occ & 1 << i))
 			drw_rect(drw, x + ulinepad, bh - ulinestroke - ulinevoffset, w - (ulinepad * 2), ulinestroke, 1, invert);
 		x += w;
 	}

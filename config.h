@@ -24,7 +24,7 @@ static int showbar              = 1;        /* 0 means no bar */
 static int topbar               = 1;        /* 0 means bottom bar */
 
 /* ------------- colorscheme ------------- */
-#include "colors/amarena.h"
+#include "colors/onedark.h"
 static char *colors[][3]        = {
 	/*               fg             bg              border  */
 	[SchemeNorm] = { foreground,    background,     background  },
@@ -67,8 +67,10 @@ static const unsigned int ulinevoffset  = 0;     /* how far above the bottom of 
 #define APP_BROWSER             "firefox"
 #define APP_BROWSER_            "firefox --private-window"
 #define APP_MENU                "dmenu_run"
-#define APP_TERMINAL            "st"
-#define CLASS_TERMINAL          "St"
+#define APP_TERM                "st"
+#define CLASS_TERM              "St"
+#define CLASS_SP                "ScratchPad"
+#define TITLE_SP                "scratchpad"
 
 /* ---------------- rules ---------------- */
 static const Rule rules[]       = {
@@ -76,11 +78,13 @@ static const Rule rules[]       = {
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
 	 */
-	/* class            instance    title           tags mask   isfloating  isterminal  noswallow   monitor scratchpad */
-	{ "Gimp",           NULL,       NULL,           0,          1,          0,          0,          -1,     0   },
-	{ "ScratchPad",     NULL,       "scratchpad",   0,          1,          1,          0,          -1,     's' },
-	{ CLASS_TERMINAL,   NULL,       NULL,           0,          0,          1,          0,          -1,     0   },
-	{ NULL,             NULL,       "Event Tester", 0,          0,          0,          1,          -1,     0   },
+	/* class              instance    title           tags mask   isfloating  isterminal  noswallow   monitor scratchpad */
+	{ "Gimp",             NULL,       NULL,           0,          1,          0,          0,          -1,     0   },
+	{ CLASS_SP,           NULL,       TITLE_SP,       0,          1,          1,          0,          -1,     's' },
+	{ CLASS_TERM,         NULL,       NULL,           0,          0,          1,          0,          -1,     0   },
+	{ "mpv",              NULL,       NULL,           1 << 2,     0,          0,          0,          -1,     0   },
+	{ "TelegramDesktop",  NULL,       NULL,           1 << 4,     0,          0,          0,          -1,     0   },
+	{ NULL,               NULL,       "Event Tester", 0,          0,          0,          1,          -1,     0   },
 };
 
 /* -------------- barmodules ------------- */
@@ -167,10 +171,10 @@ ResourcePref resources[]        = {
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
 /* first arg only serves to match against key in rules */
-static const char *scratchpadcmd[] = { "s", APP_TERMINAL, "-c", "ScratchPad", "-t", "scratchpad", NULL };
+static const char *scratchpadcmd[] = { "s", APP_TERM, "-c", CLASS_SP, "-t", TITLE_SP, NULL };
 
-static const char *menucmd[]    = { APP_MENU, "-h", BARHEIGHT_STR, NULL };
-static const char *termcmd[]    = { APP_TERMINAL, NULL };
+static const char *menucmd[]    = { APP_MENU, "-p", "Run ", "-h", BARHEIGHT_STR, NULL };
+static const char *termcmd[]    = { APP_TERM, NULL };
 
 #include <X11/XF86keysym.h>
 static const char vol_up[]      =  "pactl set-sink-volume 0 +5%; kill -44 $(pidof dwmblocks)" ;

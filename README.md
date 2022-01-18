@@ -1,12 +1,12 @@
 <div align="center">
     <h1>voidwm</h1>
-    <b>Jitesh's build of <a href="https://dwm.suckless.org/">dwm</a></b>
+    <b>sanely patched <a href="https://dwm.suckless.org/">dwm</a></b>
     <p></p>
 </div>
 
-![dwm-preview-03](https://github.com/pixxel8/aperture/raw/master/dwm-03.png)
-![dwm-preview-04](https://github.com/pixxel8/aperture/raw/master/dwm-04.png)
-![dwm-preview-05](https://github.com/pixxel8/aperture/raw/master/dwm-05.png)
+![voidwm-preview](https://github.com/pixxel8/aperture/raw/master/voidwm/voidwm-01.png/)
+![voidwm-preview](https://github.com/pixxel8/aperture/raw/master/voidwm/voidwm-02.png/)
+![voidwm-preview](https://github.com/pixxel8/aperture/raw/master/voidwm/voidwm-03.png/)
 
 
 # Getting started
@@ -17,7 +17,6 @@ git clone https://github.com/pixxel8/voidwm
 cd voidwm
 sudo make clean install
 ```
-- I've also got my build of [dwmblocks](https://github.com/pixxel8/dwmblocks) (status bar for dwm).
 
 ## Running dwm
 ### Using startx
@@ -43,7 +42,7 @@ See [config.h](config.h) for various key bindings, layouts supported, and more. 
 - Cycle through non-empty tags with `Alt+(shift+)tab` (see [shiftviewclients](https://github.com/bakkeby/patches/wiki/shiftviewclients/)).
 - Use Xresources variables to set colors, borderpx, barheight and more (see [xresources](https://dwm.suckless.org/patches/xresources/)).
 - Make clients go fullscreen or fake fullscreen with `Mod+(shift+)f` (see [fullscreen-compilation](https://github.com/bakkeby/patches/wiki/fullscreen-compilation/)).
-- Use layout, nmaster, mfact, gaps, & bar on per tag basis (see [pertag](https://dwm.suckless.org/patches/pertag/)).
+- Use layout, nmaster, mfact, gaps (can be toggled with `PERTAG_VANITYGAPS`), & bar on per tag basis (see [pertag](https://dwm.suckless.org/patches/pertag/)).
 - Reorganize and distribute tags with `Mod+(shift+)r` (see [reorganizetags](https://dwm.suckless.org/patches/reorganizetags/)).
 - Extensive mouse support
     - Change master area with `Mod+shift+Button1` (see [dragmfact](https://github.com/bakkeby/patches/wiki/dragmfact/)).
@@ -56,11 +55,19 @@ See [config.h](config.h) for various key bindings, layouts supported, and more. 
 - Make windows sticky with `Mod+s` (see [sticky](https://dwm.suckless.org/patches/sticky/)).
 - Restart dwm with `Mod+shift+q` (see [restartsig](https://dwm.suckless.org/patches/restartsig/)).
 - Swallow windows & allow exceptions (see [swallow](https://github.com/bakkeby/patches/wiki/swallow/)).
-- Seamless [pywal](https://github.com/dylanaraps/pywal/) support: change colors on the fly without restarting or exiting dwm with `Mod+q` (modified [xrdb](https://dwm.suckless.org/patches/xrdb/): [diff](https://github.com/pixxel8/voidwm/commit/10ba0c06ddd648bee6b9968b65d4addfd57d7ecf)).
+- Seamless [pywal](https://github.com/dylanaraps/pywal/) support: change colors on the fly without restarting or exiting dwm with `Mod+q` ([modified xrdb](https://github.com/pixxel8/voidwm/commit/10ba0c06ddd648bee6b9968b65d4addfd57d7ecf/)).
+- Colorful tags ([modified rainbowtags](https://github.com/pixxel8/voidwm/commit/b17c5629a73c63fd4f8a3f88f8b7a8b0bbddcb97/)).
 - To see list of all patches, run:
 ```bash
 git log --oneline | grep "patch++" | cut -c17-
 ```
+
+
+# Status bar
+- `voidwm` uses [my fork](https://github.com/pixxel8/dwmblocks/) of [dwmblocks](https://github.com/torrinfail/dwmblocks/).
+- Colorful status bar (status2d); toggleable with `enable_status2d` variable in [status2d settings](https://github.com/pixxel8/dwmblocks/blob/master/scripts/sb-status2d/).
+- Seamless [pywal](https://github.com/dylanaraps/pywal/) support: match colors of status bar with Xresources variables; toggleable with `enable_Xresources` variable in [status2d settings](https://github.com/pixxel8/dwmblocks/blob/master/scripts/sb-status2d/).
+- NOTE: You need to restart `dwmblocks` after updating Xresources variables.
 
 
 # Touchpad functionality
